@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LibraryApiR</name>
+    </assembly>
+    <members>
+        <member name="M:LibraryApiR.Controllers.AuthenticationController.Login(MyVet.Domain.Dto.LoginDto)">
+             <summary>
+             Login
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /Todo
+                 {
+                    "userName": "useradmin",
+                    "password": "123456"
+                 }
+            
+             </remarks>
+             <param name="login"></param>
+             <returns> Token</returns>
+             <response code="200">Token</response>
+             <response code="400">Business Exception</response>
+             <response code="401">User unauthorized</response>
+             <response code="500">Oops! </response>
+        </member>
+        <member name="M:LibraryApiR.Controllers.BookController.GetAllBooks">
+            <summary>
+            Obtiene todos los libros de la Biblioteca
+            </summary>
+            <returns></returns>
+            <response code="200">OK! </response>
+            <response code="400">Business Exception</response>
+            <response code="500">Oops! Can't process your request now</response>
+        </member>
+        <member name="M:LibraryApiR.Controllers.BookController.InsertBooks(MyVet.Domain.Dto.Library.InsertBookDto)">
+            <summary>
+            Insertar Libros
+            </summary>
+            <param name="book"></param>
+            <returns></returns>
+            <response code="200">OK! </response>
+            <response code="400">Business Exception</response>
+            <response code="500">Oops! Can't process your request now</response>
+        </member>
+        <member name="M:LibraryApiR.Controllers.BookController.UpdateBooks(MyVet.Domain.Dto.BookDto)">
+            <summary>
+            Actualizar Libros
+            </summary>
+            <param name="book"></param>
+            <returns></returns>
+            <response code="200">OK! </response>
+            <response code="400">Business Exception</response>
+            <response code="500">Oops! Can't process your request now</response>
+        </member>
+        <member name="M:LibraryApiR.Controllers.BookController.DeleteBooks(System.Int32)">
+            <summary>
+            Eliminar Libros
+            </summary>
+            <param name="idBook"></param>
+            <returns></returns>
+            <response code="200">OK! </response>
+            <response code="400">Business Exception</response>
+            <response code="500">Oops! Can't process your request now</response>
+        </member>
+        <member name="M:LibraryApiR.Controllers.BookController.InsertMyBooks(System.Int32)">
+            <summary>
+            Insertar mis Libros
+            </summary>
+            <param name="idBook"></param>
+            <returns></returns>
+            <response code="200">OK! </response>
+            <response code="400">Business Exception</response>
+            <response code="500">Oops! Can't process your request now</response>
+        </member>
+        <member name="M:LibraryApiR.Handlers.CustomExceptionHandler.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            Metodo encargado de capturar todas las Excepciones del proyecto,
+            Se debe agregar el decorador a cada controller [TypeFilter(typeof(CustomExceptionHandler))]
+            </summary>
+            <param name="context"> Parametro donde queda capturada la Exception </param>
+        </member>
+    </members>
+</doc>
