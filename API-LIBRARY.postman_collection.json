@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "8585db38-f41c-45bc-aaa1-a52937f09d62",
+		"name": "API-LIBRARY",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3MWY2NGNkOS1lZDRhLTRkY2UtYjJlZi1iZjNlNTdiMDMzMGEiLCJJZFVzZXIiOiIxIiwiVXNlck5hbWUiOiJKdWFuICBNb250ZW5lZ3JvIiwiRW1haWwiOiJqdWFuQGdtYWlsLmNvbSIsIklkUm9sIjoiIiwibmJmIjoxNjQ0NTk3Nzg0LCJleHAiOjE2NDQ1OTc5MDQsImlzcyI6ImxvY2FsaG9zdCIsImF1ZCI6InVzZXJzIn0.xY8fBgqJzSHm1Ierd9G_EcQyQbNa0TBhihIxBXap2u0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"juan@gmail.com\",\r\n  \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44307/api/Book/GetAllBooks",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44307",
+					"path": [
+						"api",
+						"Book",
+						"GetAllBooks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllBooks",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "InsertBooks",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Java\",\r\n  \"dateRelease\": \"2022-02-11\",\r\n  \"description\": \"Estructura de datos\",\r\n  \"idAuthor\": 1,\r\n  \"idTypeBook\": 1,\r\n  \"idState\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44307/api/Book/InsertBooks",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44307",
+					"path": [
+						"api",
+						"Book",
+						"InsertBooks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateBooks",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteBooks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idBook\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44307/api/Book/DeleteBooks",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44307",
+					"path": [
+						"api",
+						"Book",
+						"DeleteBooks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InsertMyBooks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0MGFhMTI5Zi00YzE3LTQxODctOWI4Ny1kNWViMzFiN2NlNGMiLCJJZFVzZXIiOiIxIiwiVXNlck5hbWUiOiJKdWFuIE1vbnRlbmVncm8iLCJFbWFpbCI6Imp1YW5AZ21haWwuY29tIiwiSWRSb2wiOiIiLCJuYmYiOjE2NDQ2MTQxODQsImV4cCI6MTY0NDYxNzc4NCwiaXNzIjoibG9jYWxob3N0IiwiYXVkIjoidXNlcnMifQ.6jQelxPrakRc4iEEvDHBU7RP0f0fPuH_8Dll6Cxjxq8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44307/api/Book/InsertMyBooks?idBook=5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44307",
+					"path": [
+						"api",
+						"Book",
+						"InsertMyBooks"
+					],
+					"query": [
+						{
+							"key": "idBook",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
