@@ -328,7 +328,7 @@ namespace Infraestructure.Core.Data
             {
                 var rolesPermisosAdmin = _context.PermissionEntity.Select(x => new RolPermissionEntity
                 {
-                    IdRol = (int)Enums.Rol.Administrador,
+                    IdRol = (int)Enums.Rol.Bibliotecario,
                     IdPermission = x.IdPermission
                 }).ToList();
 
@@ -466,25 +466,33 @@ namespace Infraestructure.Core.Data
         //Lista de Usuarios
         private async Task CheckUsersAsync()
         {
-            if (!_context.UserEntity.Any())
+            if (!_context.RolUserEntity.Any())
             {
-                _context.UserEntity.AddRange(new List<UserEntity>
+                _context.RolUserEntity.AddRange(new List<RolUserEntity>
                 {
-                    new UserEntity
-                    {
-                        Name = "Juan",
-                        LastName = "Montenegro",
-                        Email = "juan@gmail.com",
-                        Password = "1234"
-                    },
-
-                    new UserEntity
-                    {
-                        Name = "Jorge",
-                        LastName = "Montenegro",
-                        Email = "jorge@gmail.com",
-                        Password = "1234"
-                    },
+                    new RolUserEntity()
+                        {
+                            IdRol = (int)Enums.Rol.Estandar,
+                            UserEntity = new UserEntity()
+                            {
+                                Name = "Jorge",
+                                LastName = "Montenegro",
+                                Email = "jorge@gmail.com",
+                                Password = "1234"
+                            }
+                        },                    
+                    
+                    new RolUserEntity()
+                        {
+                            IdRol = (int)Enums.Rol.Bibliotecario,
+                            UserEntity = new UserEntity()
+                            {
+                                Name = "Juan",
+                                LastName = "Montenegro",
+                                Email = "juan@gmail.com",
+                                Password = "1234"
+                            }
+                        },
                 });
 
                 await _context.SaveChangesAsync();

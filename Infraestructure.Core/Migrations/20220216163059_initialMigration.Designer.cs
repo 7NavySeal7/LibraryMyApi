@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructure.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220216124003_initialMigration")]
+    [Migration("20220216163059_initialMigration")]
     partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -339,7 +339,7 @@ namespace Infraestructure.Core.Migrations
                         .IsRequired();
 
                     b.HasOne("Infraestructure.Entity.Models.RolEntity", "RolEntity")
-                        .WithMany()
+                        .WithMany("RolPermissionEntities")
                         .HasForeignKey("IdRol")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -348,7 +348,7 @@ namespace Infraestructure.Core.Migrations
             modelBuilder.Entity("Infraestructure.Entity.Models.RolUserEntity", b =>
                 {
                     b.HasOne("Infraestructure.Entity.Models.RolEntity", "RolEntity")
-                        .WithMany()
+                        .WithMany("RolUserEntities")
                         .HasForeignKey("IdRol")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

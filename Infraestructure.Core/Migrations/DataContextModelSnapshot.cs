@@ -337,7 +337,7 @@ namespace Infraestructure.Core.Migrations
                         .IsRequired();
 
                     b.HasOne("Infraestructure.Entity.Models.RolEntity", "RolEntity")
-                        .WithMany()
+                        .WithMany("RolPermissionEntities")
                         .HasForeignKey("IdRol")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -346,7 +346,7 @@ namespace Infraestructure.Core.Migrations
             modelBuilder.Entity("Infraestructure.Entity.Models.RolUserEntity", b =>
                 {
                     b.HasOne("Infraestructure.Entity.Models.RolEntity", "RolEntity")
-                        .WithMany()
+                        .WithMany("RolUserEntities")
                         .HasForeignKey("IdRol")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
