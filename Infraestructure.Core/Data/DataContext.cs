@@ -26,7 +26,6 @@ namespace Infraestructure.Core.Data
         public DbSet<AuthorEntity> AuthorEntity { get; set; }
         public DbSet<BookEntity> BookEntity { get; set; }
         public DbSet<TypeBookEntity> TypeBookEntity { get; set; }
-        public DbSet<UserBookEntity> UserBookEntity { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,10 +34,10 @@ namespace Infraestructure.Core.Data
             .IsUnique();
 
             modelBuilder.Entity<TypeStateEntity>().Property(t => t.IdTypeState).ValueGeneratedNever();
-            modelBuilder.Entity<TypePermissionEntity>().Property(t => t.IdTypePermission).ValueGeneratedNever();
             modelBuilder.Entity<StateEntity>().Property(t => t.IdState).ValueGeneratedNever();
-            //modelBuilder.Entity<RolEntity>().Property(t => t.IdRol).ValueGeneratedNever();
+            modelBuilder.Entity<TypePermissionEntity>().Property(t => t.IdTypePermission).ValueGeneratedNever();
             modelBuilder.Entity<PermissionEntity>().Property(t => t.IdPermission).ValueGeneratedNever();
+            modelBuilder.Entity<RolEntity>().Property(t => t.IdRol).ValueGeneratedNever();
             //modelBuilder.Entity<TypeBookEntity>().Property(t => t.IdTypeBook).ValueGeneratedNever();
         }
     }

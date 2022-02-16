@@ -9,10 +9,9 @@ namespace MyVet.Domain.Services.Interface
 {
     public interface IBookService
     {
-        List<ConsultBookDto> GetAllBooks(int idUser);
-        List<ConsultBookDto> GetAllMyBooks(int idUser);
+        List<ConsultBookDto> GetAllBooks();
+        ConsultBookDto GetBook(int idBook);
         Task<bool> InsertBookAsync(InsertBookDto book);
-        Task<bool> InsertMyBooksAsync(int idBook, int idUser);
         Task<bool> UpdateBookAsync(BookDto book);
         Task<ResponseDto> DeleteBooksAsync(int idBook);
     }

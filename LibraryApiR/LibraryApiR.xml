@@ -34,6 +34,16 @@
             <response code="400">Business Exception</response>
             <response code="500">Oops! Can't process your request now</response>
         </member>
+        <member name="M:LibraryApiR.Controllers.BookController.GetBook(System.Int32)">
+            <summary>
+            Obtiene solo un Libro
+            </summary>
+            <param name="idBook"></param>
+            <returns></returns>
+            <response code="200">OK! </response>
+            <response code="400">Business Exception</response>
+            <response code="500">Oops! Can't process your request now</response>
+        </member>
         <member name="M:LibraryApiR.Controllers.BookController.InsertBooks(MyVet.Domain.Dto.Library.InsertBookDto)">
             <summary>
             Insertar Libros
@@ -64,11 +74,40 @@
             <response code="400">Business Exception</response>
             <response code="500">Oops! Can't process your request now</response>
         </member>
-        <member name="M:LibraryApiR.Controllers.BookController.InsertMyBooks(System.Int32)">
+        <member name="M:LibraryApiR.Controllers.EditorialController.GetAllEditorial">
             <summary>
-            Insertar mis Libros
+            Obtiene todas las Editoriales
             </summary>
-            <param name="idBook"></param>
+            <returns></returns>
+            <response code="200">OK! </response>
+            <response code="400">Business Exception</response>
+            <response code="500">Oops! Can't process your request now</response>
+        </member>
+        <member name="M:LibraryApiR.Controllers.EditorialController.InsertEditorial(MyVet.Domain.Dto.Library.EditorialDto)">
+            <summary>
+            Inserta Editoriales
+            </summary>
+            <param name="editDto"></param>
+            <returns></returns>
+            <response code="200">OK! </response>
+            <response code="400">Business Exception</response>
+            <response code="500">Oops! Can't process your request now</response>
+        </member>
+        <member name="M:LibraryApiR.Controllers.EditorialController.UpdateEditorial(MyVet.Domain.Dto.Library.EditorialDto)">
+            <summary>
+            Actualiza Editoriales
+            </summary>
+            <param name="editDto"></param>
+            <returns></returns>
+            <response code="200">OK! </response>
+            <response code="400">Business Exception</response>
+            <response code="500">Oops! Can't process your request now</response>
+        </member>
+        <member name="M:LibraryApiR.Controllers.EditorialController.DeleteEditorial(System.Int32)">
+            <summary>
+            Elimina Editoriales
+            </summary>
+            <param name="idEdit"></param>
             <returns></returns>
             <response code="200">OK! </response>
             <response code="400">Business Exception</response>

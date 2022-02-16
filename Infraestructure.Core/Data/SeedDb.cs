@@ -28,9 +28,9 @@ namespace Infraestructure.Core.Data
             await CheckStateAsync();
             await CheckTypePermissionAsync();
             await CheckPermissionAsync();
-            //await CheckRolAsync();
-            await CheckRolPermissionAsync();
-            //await CheckTypeBookAsync();
+            await CheckRolAsync();
+            await CheckRolPermissonAsync();
+            await CheckTypeBookAsync();
         }
 
         //Tipos de Estados
@@ -42,14 +42,9 @@ namespace Infraestructure.Core.Data
                 {
                     new TypeStateEntity
                     {
-                        IdTypeState=(int)Enums.TypeState.EstadoUsuario,
-                        TypeState="Estado de Usuarios"
-                    },                    
-                    new TypeStateEntity
-                    {
                         IdTypeState=(int)Enums.TypeState.EstadoLibro,
                         TypeState="Estado del Libro"
-                    },
+                    }
                 });
 
                 await _context.SaveChangesAsync();
@@ -62,25 +57,7 @@ namespace Infraestructure.Core.Data
             if (!_context.StateEntity.Any())
             {
                 _context.StateEntity.AddRange(new List<StateEntity>
-                {
-                    new StateEntity
-                    {
-                        IdTypeState=(int)Enums.TypeState.EstadoUsuario,
-                        IdState=(int)Enums.State.UsuarioActivo,
-                        State="Activo"
-                    },                    
-                    new StateEntity
-                    {
-                        IdTypeState=(int)Enums.TypeState.EstadoUsuario,
-                        IdState=(int)Enums.State.UsuarioInactivo,
-                        State="Inactivo"
-                    },                      
-                    new StateEntity
-                    {
-                        IdTypeState=(int)Enums.TypeState.EstadoUsuario,
-                        IdState=(int)Enums.State.UsuarioSuspendido,
-                        State="Suspendido"
-                    },           
+                {        
                     new StateEntity
                     {
                         IdTypeState=(int)Enums.TypeState.EstadoLibro,
@@ -133,6 +110,11 @@ namespace Infraestructure.Core.Data
                     {
                         IdTypePermission=(int)Enums.TypePermission.Libros,
                         TypePermission="Libros"
+                    },                    
+                    new TypePermissionEntity
+                    {
+                        IdTypePermission=(int)Enums.TypePermission.Editoriales,
+                        TypePermission="Editoriales"
                     },
                 });
 
@@ -245,7 +227,7 @@ namespace Infraestructure.Core.Data
                         IdPermission=(int)Enums.Permission.CrearLibros,
                         IdTypePermission=(int)Enums.TypePermission.Libros,
                         Permission="Consultar Libros",
-                        Description="Consultar los estados de los libros"
+                        Description="Crear los estados de los libros"
                     },                    
                     
                     new PermissionEntity
@@ -271,120 +253,72 @@ namespace Infraestructure.Core.Data
                         Permission="Consultar Libros",
                         Description="Consultar los estados de los libros"
                     },
+
+                    //Editoriales
+                    new PermissionEntity
+                    {
+                        IdPermission=(int)Enums.Permission.CrearEditoriales,
+                        IdTypePermission=(int)Enums.TypePermission.Editoriales,
+                        Permission="Crear Editoriales",
+                        Description="Crear los estados de las editoriales"
+                    },                    
+                    
+                    new PermissionEntity
+                    {
+                        IdPermission=(int)Enums.Permission.ActualizarEditoriales,
+                        IdTypePermission=(int)Enums.TypePermission.Editoriales,
+                        Permission="Actualizar Editoriales",
+                        Description="Actualizar los estados de las editoriales"
+                    },                    
+                    
+                    new PermissionEntity
+                    {
+                        IdPermission=(int)Enums.Permission.EliminarEditoriales,
+                        IdTypePermission=(int)Enums.TypePermission.Editoriales,
+                        Permission="Eliminar Editoriales",
+                        Description="Eliminar los estados de las editoriales"
+                    },                    
+                    
+                    new PermissionEntity
+                    {
+                        IdPermission=(int)Enums.Permission.ConsultarEditoriales,
+                        IdTypePermission=(int)Enums.TypePermission.Editoriales,
+                        Permission="Consultar Editoriales",
+                        Description="Consultar los estados de las editoriales"
+                    },
                 });
                 await _context.SaveChangesAsync();
             }
         }
 
-        #region Roles
         //Roles
-        //private async Task CheckRolAsync()
-        //{
-        //    if (_context.RolEntity.Any())
-        //    {
-        //        _context.RolEntity.AddRange(new List<RolEntity>
-        //        {
-        //            new RolEntity
-        //            {
-        //                IdRol=(int)Enums.Rol.Administrador,
-        //                Rol="Administrador"
-        //            },
-        //            new RolEntity
-        //            {
-        //                IdRol=(int)Enums.Rol.Bibliotecario,
-        //                Rol="Bibliotecario"
-        //            },
-        //            new RolEntity
-        //            {
-        //                IdRol=(int)Enums.Rol.Estandar,
-        //                Rol="Estandar"
-        //            },
-        //        });
-        //        await _context.SaveChangesAsync();
-        //    }
-        //}
+        private async Task CheckRolAsync()
+        {
+            if (!_context.RolEntity.Any())
+            {
+                _context.RolEntity.AddRange(new List<RolEntity>
+                {
+                    new RolEntity
+                    {
+                        IdRol=(int) Enums.Rol.Administrador,
+                        Rol= "Administrador"
+                    },
+                    new RolEntity
+                    {
+                        IdRol=(int) Enums.Rol.Bibliotecario,
+                        Rol= "Bibliotecario"
+                    },
+                    new RolEntity
+                    {
+                        IdRol = (int)Enums.Rol.Estandar,
+                        Rol = "Estandar"
+                    },
+                });
+                await _context.SaveChangesAsync();
+            }
+        }
 
-        //RolPermisos 
-        #endregion
-
-        //Tipos de Libros
-        //private async Task CheckTypeBookAsync()
-        //{
-        //    if (!_context.TypeBookEntity.Any())
-        //    {
-        //        _context.TypeBookEntity.AddRange(new List<TypeBookEntity>
-        //        {
-        //            new TypeBookEntity
-        //            {
-        //                IdTypeBook=(int)Enums.TypeBook.Literatura,
-        //                TypeBook="Literatura"
-        //            },
-
-        //            new TypeBookEntity
-        //            {
-        //                IdTypeBook=(int)Enums.TypeBook.Fantasia,
-        //                TypeBook="Fantasia"
-        //            },
-
-        //            new TypeBookEntity
-        //            {
-        //                IdTypeBook=(int)Enums.TypeBook.Infantil,
-        //                TypeBook="Infantil"
-        //            },
-
-        //            new TypeBookEntity
-        //            {
-        //                IdTypeBook=(int)Enums.TypeBook.Juvenil,
-        //                TypeBook="Juvenil"
-        //            },
-
-        //            new TypeBookEntity
-        //            {
-        //                IdTypeBook=(int)Enums.TypeBook.Ciencia,
-        //                TypeBook="Ciencia"
-        //            },
-
-        //            new TypeBookEntity
-        //            {
-        //                IdTypeBook=(int)Enums.TypeBook.Matematicas,
-        //                TypeBook="Matematicas"
-        //            },
-
-        //            new TypeBookEntity
-        //            {
-        //                IdTypeBook=(int)Enums.TypeBook.Salud,
-        //                TypeBook="Salud"
-        //            },
-
-        //            new TypeBookEntity
-        //            {
-        //                IdTypeBook=(int)Enums.TypeBook.Gastronomia,
-        //                TypeBook="Gastronomia"
-        //            },
-
-        //            new TypeBookEntity
-        //            {
-        //                IdTypeBook=(int)Enums.TypeBook.Gastronomia,
-        //                TypeBook="Gastronomia"
-        //            },
-
-        //            new TypeBookEntity
-        //            {
-        //                IdTypeBook=(int)Enums.TypeBook.Ocio,
-        //                TypeBook="Ocio"
-        //            },
-
-        //            new TypeBookEntity
-        //            {
-        //                IdTypeBook=(int)Enums.TypeBook.Poesia,
-        //                TypeBook="Poesia"
-        //            },
-        //        });
-
-        //        await _context.SaveChangesAsync();
-        //    }
-        //}
-        private async Task CheckRolPermissionAsync()
+        private async Task CheckRolPermissonAsync()
         {
             if (!_context.RolPermissionEntity.Where(x => x.IdRol == (int)Enums.Rol.Administrador).Any())
             {
@@ -398,5 +332,68 @@ namespace Infraestructure.Core.Data
                 await _context.SaveChangesAsync();
             }
         }
+
+        //Tipos de Libros
+        private async Task CheckTypeBookAsync()
+        {
+            if (!_context.TypeBookEntity.Any())
+            {
+                _context.TypeBookEntity.AddRange(new List<TypeBookEntity>
+                {
+                    new TypeBookEntity
+                    {
+                        TypeBook="Literatura"
+                    },
+
+                    new TypeBookEntity
+                    {
+                        TypeBook="Fantasia"
+                    },
+
+                    new TypeBookEntity
+                    {
+                        TypeBook="Infantil"
+                    },
+
+                    new TypeBookEntity
+                    {
+                        TypeBook="Juvenil"
+                    },
+
+                    new TypeBookEntity
+                    {
+                        TypeBook="Ciencia"
+                    },
+
+                    new TypeBookEntity
+                    {
+                        TypeBook="Matematicas"
+                    },
+
+                    new TypeBookEntity
+                    {
+                        TypeBook="Salud"
+                    },
+
+                    new TypeBookEntity
+                    {
+                        TypeBook="Gastronomia"
+                    },
+
+                    new TypeBookEntity
+                    {
+                        TypeBook="Ocio"
+                    },
+
+                    new TypeBookEntity
+                    {
+                        TypeBook="Poesia"
+                    },
+                });
+
+                await _context.SaveChangesAsync();
+            }
+        }
     }
+
 }

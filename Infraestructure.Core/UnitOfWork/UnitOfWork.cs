@@ -42,7 +42,7 @@ namespace Infraestructure.Core.UnitOfWork
         private IRepository<AuthorEntity> authorRepository;
         private IRepository<BookEntity> bookRepository;
         private IRepository<TypeBookEntity> typeBookRepository;
-        private IRepository<UserBookEntity> userBookRepository;
+        private IRepository<EditorialEntity> editorialRepository;
         #endregion
 
 
@@ -157,14 +157,14 @@ namespace Infraestructure.Core.UnitOfWork
                 return typeBookRepository;
             }
         }        
-        public IRepository<UserBookEntity> UserBookRepository
+        public IRepository<EditorialEntity> EditorialRepository
         {
             get
             {
-                if (this.userBookRepository == null)
-                    this.userBookRepository = new Repository<UserBookEntity>(_context);
+                if (this.editorialRepository == null)
+                    this.editorialRepository = new Repository<EditorialEntity>(_context);
 
-                return userBookRepository;
+                return editorialRepository;
             }
         }
         #endregion

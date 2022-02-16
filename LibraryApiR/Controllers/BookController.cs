@@ -44,9 +44,7 @@ namespace LibraryApiR.Controllers
         [Route("GetAllBooks")]
         public IActionResult GetAllBooks()
         {
-            string idUser = Utils.GetClaimValue(Request.Headers["Authorization"], TypeClaims.IdUser);
-
-            List<ConsultBookDto> list = _bookService.GetAllBooks(Convert.ToInt32(idUser));
+            List<ConsultBookDto> list = _bookService.GetAllBooks();
 
             ResponseDto response = new ResponseDto()
             {
@@ -54,10 +52,30 @@ namespace LibraryApiR.Controllers
                 Result = list,
                 Message = string.Empty
             };
-
             return Ok(response);
         }
 
+        /// <summary>
+        /// Obtiene solo un Libro
+        /// </summary>
+        /// <param name="idBook"></param>
+        /// <returns></returns>
+        /// <response code="200">OK! </response>
+        /// <response code="400">Business Exception</response>
+        /// <response code="500">Oops! Can't process your request now</response>
+        [HttpGet]
+        [Route("GetBook")]
+        public IActionResult GetBook(int idBook)
+        {
+            ConsultBookDto list = _bookService.GetBook(idBook);
+            ResponseDto response = new ResponseDto()
+            {
+                IsSuccess = true,
+                Result = list,
+                Message = string.Empty
+            };
+            return Ok(response);
+        }
 
         /// <summary>
         /// Insertar Libros
@@ -138,40 +156,6 @@ namespace LibraryApiR.Controllers
                 response = Ok(result);
             else
                 response = BadRequest(result);
-
-            return Ok(response);
-        }
-
-
-        /// <summary>
-        /// Insertar mis Libros
-        /// </summary>
-        /// <param name="idBook"></param>
-        /// <returns></returns>
-        /// <response code="200">OK! </response>
-        /// <response code="400">Business Exception</response>
-        /// <response code="500">Oops! Can't process your request now</response>
-        [HttpPost]
-        [Route("InsertMyBooks")]
-        public async Task<IActionResult> InsertMyBooks(int idBook)
-        {
-            IActionResult response;
-
-            string idUser = Utils.GetClaimValue(Request.Headers["Authorization"], TypeClaims.IdUser);
-
-            bool result = await _bookService.InsertMyBooksAsync(Convert.ToInt32(idBook), Convert.ToInt32(idUser));
-
-            ResponseDto responseDto = new ResponseDto()
-            {
-                IsSuccess = result,
-                Result = result,
-                Message = result ? GeneralMessages.ItemInserted : GeneralMessages.ItemNoInserted
-            };
-
-            if (result)
-                response = Ok(responseDto);
-            else
-                response = BadRequest(responseDto);
 
             return Ok(response);
         }

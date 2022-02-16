@@ -35,10 +35,5 @@ namespace Infraestructure.Entity.Models.Library
         [ForeignKey("StateEntity")]
         public int IdState { get; set; }
         public StateEntity StateEntity { get; set; }        
-        
-        [ForeignKey("UserEntity")]
-        public int? IdUser { get; set; }
-        public UserEntity UserEntity { get; set; }
-
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructure.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220211202432_initialMigration")]
+    [Migration("20220216120251_initialMigration")]
     partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,9 +69,6 @@ namespace Infraestructure.Core.Migrations
                     b.Property<int>("IdTypeBook")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdUser")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
@@ -85,8 +82,6 @@ namespace Infraestructure.Core.Migrations
                     b.HasIndex("IdState");
 
                     b.HasIndex("IdTypeBook");
-
-                    b.HasIndex("IdUser");
 
                     b.ToTable("Book","Library");
                 });
@@ -125,28 +120,6 @@ namespace Infraestructure.Core.Migrations
                     b.HasKey("IdTypeBook");
 
                     b.ToTable("TypeBook","Library");
-                });
-
-            modelBuilder.Entity("Infraestructure.Entity.Models.Library.UserBookEntity", b =>
-                {
-                    b.Property<int>("IdUserBook")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("IdBook")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUser")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdUserBook");
-
-                    b.HasIndex("IdBook");
-
-                    b.HasIndex("IdUser");
-
-                    b.ToTable("UserBook","Library");
                 });
 
             modelBuilder.Entity("Infraestructure.Entity.Models.Master.StateEntity", b =>
@@ -335,25 +308,6 @@ namespace Infraestructure.Core.Migrations
                     b.HasOne("Infraestructure.Entity.Models.Library.TypeBookEntity", "TypeBookEntity")
                         .WithMany()
                         .HasForeignKey("IdTypeBook")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Infraestructure.Entity.Models.UserEntity", "UserEntity")
-                        .WithMany()
-                        .HasForeignKey("IdUser");
-                });
-
-            modelBuilder.Entity("Infraestructure.Entity.Models.Library.UserBookEntity", b =>
-                {
-                    b.HasOne("Infraestructure.Entity.Models.Library.BookEntity", "BookEntity")
-                        .WithMany()
-                        .HasForeignKey("IdBook")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Infraestructure.Entity.Models.UserEntity", "UserEntity")
-                        .WithMany()
-                        .HasForeignKey("IdUser")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

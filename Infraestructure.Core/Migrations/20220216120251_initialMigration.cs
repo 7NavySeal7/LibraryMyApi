@@ -202,8 +202,7 @@ namespace Infraestructure.Core.Migrations
                     IdEditorial = table.Column<int>(nullable: false),
                     IdAuthor = table.Column<int>(nullable: false),
                     IdTypeBook = table.Column<int>(nullable: false),
-                    IdState = table.Column<int>(nullable: false),
-                    IdUser = table.Column<int>(nullable: true)
+                    IdState = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -236,13 +235,6 @@ namespace Infraestructure.Core.Migrations
                         principalTable: "TypeBook",
                         principalColumn: "IdTypeBook",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Book_User_IdUser",
-                        column: x => x.IdUser,
-                        principalSchema: "Security",
-                        principalTable: "User",
-                        principalColumn: "IdUser",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -274,35 +266,6 @@ namespace Infraestructure.Core.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "UserBook",
-                schema: "Library",
-                columns: table => new
-                {
-                    IdUserBook = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdBook = table.Column<int>(nullable: false),
-                    IdUser = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserBook", x => x.IdUserBook);
-                    table.ForeignKey(
-                        name: "FK_UserBook_Book_IdBook",
-                        column: x => x.IdBook,
-                        principalSchema: "Library",
-                        principalTable: "Book",
-                        principalColumn: "IdBook",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserBook_User_IdUser",
-                        column: x => x.IdUser,
-                        principalSchema: "Security",
-                        principalTable: "User",
-                        principalColumn: "IdUser",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Book_IdAuthor",
                 schema: "Library",
@@ -326,24 +289,6 @@ namespace Infraestructure.Core.Migrations
                 schema: "Library",
                 table: "Book",
                 column: "IdTypeBook");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Book_IdUser",
-                schema: "Library",
-                table: "Book",
-                column: "IdUser");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserBook_IdBook",
-                schema: "Library",
-                table: "UserBook",
-                column: "IdBook");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserBook_IdUser",
-                schema: "Library",
-                table: "UserBook",
-                column: "IdUser");
 
             migrationBuilder.CreateIndex(
                 name: "IX_State_IdTypeState",
@@ -392,7 +337,7 @@ namespace Infraestructure.Core.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserBook",
+                name: "Book",
                 schema: "Library");
 
             migrationBuilder.DropTable(
@@ -401,18 +346,6 @@ namespace Infraestructure.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "RolUser",
-                schema: "Security");
-
-            migrationBuilder.DropTable(
-                name: "Book",
-                schema: "Library");
-
-            migrationBuilder.DropTable(
-                name: "Permission",
-                schema: "Security");
-
-            migrationBuilder.DropTable(
-                name: "Rol",
                 schema: "Security");
 
             migrationBuilder.DropTable(
@@ -432,16 +365,24 @@ namespace Infraestructure.Core.Migrations
                 schema: "Library");
 
             migrationBuilder.DropTable(
-                name: "User",
+                name: "Permission",
                 schema: "Security");
 
             migrationBuilder.DropTable(
-                name: "TypePermission",
+                name: "Rol",
+                schema: "Security");
+
+            migrationBuilder.DropTable(
+                name: "User",
                 schema: "Security");
 
             migrationBuilder.DropTable(
                 name: "TypeState",
                 schema: "Master");
+
+            migrationBuilder.DropTable(
+                name: "TypePermission",
+                schema: "Security");
         }
     }
 }

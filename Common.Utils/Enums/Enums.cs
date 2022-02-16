@@ -8,22 +8,15 @@ namespace Common.Utils.Enums
     {
         public enum TypeState
         {
-            //Usuario
-            EstadoUsuario = 1,
-            //Libro
-            EstadoLibro = 2
+            //Libros
+            EstadoLibro = 1
         }
 
         public enum State
         {
-            //Usuario
-            UsuarioActivo = 1,
-            UsuarioInactivo = 2,
-            UsuarioSuspendido = 3,
-
             //Libros
-            Nuevo= 4,
-            Usado = 5
+            Nuevo= 1,
+            Usado = 2
         }
 
         public enum TypePermission
@@ -33,6 +26,7 @@ namespace Common.Utils.Enums
             Permisos = 3,
             Estados = 4,
             Libros = 5,
+            Editoriales = 6
         }
 
         public enum Permission
@@ -60,7 +54,13 @@ namespace Common.Utils.Enums
             CrearLibros = 12,
             ActualizarLibros = 13,
             EliminarLibros = 14,
-            ConsultarLibros = 15
+            ConsultarLibros = 15,            
+                
+            //Editorial
+            CrearEditoriales = 16,
+            ActualizarEditoriales = 17,
+            EliminarEditoriales = 18,
+            ConsultarEditoriales = 19
         }
 
         public enum Rol
@@ -73,7 +73,7 @@ namespace Common.Utils.Enums
         public enum TypeBook
         {
             Literatura = 1,
-            Fantasia = 2,
+            Programacion = 2,
             Infantil = 3,
             Juvenil = 4,
             Ciencia = 5,

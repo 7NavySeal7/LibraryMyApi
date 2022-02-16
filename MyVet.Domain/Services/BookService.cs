@@ -25,10 +25,9 @@ namespace MyVet.Domain.Services
         #endregion
 
         #region Methods
-        public List<ConsultBookDto> GetAllBooks(int idUser)
+        public List<ConsultBookDto> GetAllBooks()
         {
-            var books = _unitOfWork.BookRepository.FindAll(x=>(x.IdUser == idUser || x.IdUser == null ),
-                                                            p=>p.EditorialEntity,
+            var books = _unitOfWork.BookRepository.GetAll(p=>p.EditorialEntity,
                                                             p=>p.AuthorEntity,
                                                             p=>p.TypeBookEntity,
                                                             p=>p.StateEntity);
@@ -53,32 +52,33 @@ namespace MyVet.Domain.Services
             return listBooks;
         }
 
-        public List<ConsultBookDto> GetAllMyBooks(int idUser)
+        public ConsultBookDto GetBook(int idBook)
         {
-            var books = _unitOfWork.BookRepository.FindAll(x =>x.IdUser == idUser,
-                                                p => p.EditorialEntity,
-                                                p => p.AuthorEntity,
-                                                p => p.TypeBookEntity,
-                                                p => p.StateEntity);
+            var books = _unitOfWork.BookRepository.FirstOrDefault(x => x.IdBook == idBook,
+                                                                    p => p.EditorialEntity,
+                                                                    p => p.AuthorEntity,
+                                                                    p => p.TypeBookEntity,
+                                                                    p => p.StateEntity);
 
-            List<ConsultBookDto> listBooks = books.Select(x => new ConsultBookDto
+
+            ConsultBookDto listMybooks = new ConsultBookDto()
             {
-                IdBook = x.IdBook,
-                Name = x.Name,
-                DateRelease = x.DateRelease,
-                Description = x.Description,
-                IdEditorial = x.IdEditorial,
-                IdAuthor = x.IdAuthor,
-                IdTypeBook = x.IdTypeBook,
-                IdState = x.IdState,
-                NameEditorial = x.EditorialEntity.Editorial,
-                NameAuthor = x.AuthorEntity.NameAuthor,
-                NameTypeBook = x.TypeBookEntity.TypeBook,
-                NameState = x.StateEntity.State,
-                StrDateRelease = x.DateRelease == null ? "No disponible" : x.DateRelease.Value.ToString("yyyy-MM-dd")
-            }).ToList();
+                IdBook = books.IdBook,
+                Name = books.Name,
+                DateRelease = books.DateRelease,
+                Description = books.Description,
+                IdEditorial = books.IdEditorial,
+                IdAuthor = books.IdAuthor,
+                IdTypeBook = books.IdTypeBook,
+                IdState = books.IdState,
+                NameEditorial = books.EditorialEntity.Editorial,
+                NameAuthor = books.AuthorEntity.NameAuthor,
+                NameTypeBook = books.TypeBookEntity.TypeBook,
+                NameState = books.StateEntity.State,
+                StrDateRelease = books.DateRelease == null ? "No disponible" : books.DateRelease.Value.ToString("yyyy-MM-dd")
+            };
 
-            return listBooks;
+            return listMybooks;
         }
 
         public async Task<bool> InsertBookAsync(InsertBookDto book)
@@ -95,18 +95,6 @@ namespace MyVet.Domain.Services
             };
             _unitOfWork.BookRepository.Insert(books);
 
-            return await _unitOfWork.Save() > 0;
-        }
-
-        public async Task<bool> InsertMyBooksAsync(int idBook, int idUser)
-        {
-            UserBookEntity userBookEntity = new UserBookEntity()
-            {
-                IdBook = idBook,
-                IdUser = idUser,
-            };
-
-            _unitOfWork.UserBookRepository.Insert(userBookEntity);
             return await _unitOfWork.Save() > 0;
         }
 

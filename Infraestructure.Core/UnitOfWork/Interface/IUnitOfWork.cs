@@ -33,7 +33,7 @@ namespace Infraestructure.Core.UnitOfWork.Interface
 
         IRepository<TypeBookEntity> TypeBookRepository { get; }
 
-        IRepository<UserBookEntity> UserBookRepository { get; }
+        IRepository<EditorialEntity> EditorialRepository { get; }
 
 
         void Dispose();
