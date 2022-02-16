@@ -15,5 +15,8 @@ namespace Infraestructure.Entity.Models
         [MaxLength(100)]
         public string Rol { get; set; }
 
+        public IEnumerable<RolUserEntity> RolUserEntities { get; set; }
+        public IEnumerable<RolPermissionEntity> RolPermissionEntities { get; set; }
+
     }
 }

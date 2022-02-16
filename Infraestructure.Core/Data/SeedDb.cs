@@ -31,6 +31,9 @@ namespace Infraestructure.Core.Data
             await CheckRolAsync();
             await CheckRolPermissonAsync();
             await CheckTypeBookAsync();
+            await CheckAuthorsAsync();
+            await CheckEditorialsAsync();
+            await CheckUsersAsync();
         }
 
         //Tipos de Estados
@@ -318,6 +321,7 @@ namespace Infraestructure.Core.Data
             }
         }
 
+        //Roles Permisos
         private async Task CheckRolPermissonAsync()
         {
             if (!_context.RolPermissionEntity.Where(x => x.IdRol == (int)Enums.Rol.Administrador).Any())
@@ -388,6 +392,98 @@ namespace Infraestructure.Core.Data
                     new TypeBookEntity
                     {
                         TypeBook="Poesia"
+                    },
+                });
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        //Lista de autores
+        private async Task CheckAuthorsAsync()
+        {
+            if (!_context.AuthorEntity.Any())
+            {
+                _context.AuthorEntity.AddRange(new List<AuthorEntity>
+                {
+                    new AuthorEntity
+                    {
+                        NameAuthor = "Michael Abrash"
+                    },
+
+                    new AuthorEntity
+                    {
+                        NameAuthor = "Eric Allman"
+                    },
+
+                    new AuthorEntity
+                    {
+                        NameAuthor = "Paul Allen"
+                    },
+
+                    new AuthorEntity
+                    {
+                        NameAuthor = "Tarn Adams"
+                    },
+                }) ;
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        //Lista de editoriales
+        private async Task CheckEditorialsAsync()
+        {
+            if (!_context.EditorialEntity.Any())
+            {
+                _context.EditorialEntity.AddRange(new List<EditorialEntity>
+                {
+                    new EditorialEntity
+                    {
+                        Editorial = "Paenza"
+                    },
+
+                    new EditorialEntity
+                    {
+                        Editorial = "Edicions"
+                    },
+
+                    new EditorialEntity
+                    {
+                        Editorial = "Users"
+                    },
+
+                    new EditorialEntity
+                    {
+                        Editorial = "Atalanta"
+                    },
+                });
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        //Lista de Usuarios
+        private async Task CheckUsersAsync()
+        {
+            if (!_context.UserEntity.Any())
+            {
+                _context.UserEntity.AddRange(new List<UserEntity>
+                {
+                    new UserEntity
+                    {
+                        Name = "Juan",
+                        LastName = "Montenegro",
+                        Email = "juan@gmail.com",
+                        Password = "1234"
+                    },
+
+                    new UserEntity
+                    {
+                        Name = "Jorge",
+                        LastName = "Montenegro",
+                        Email = "jorge@gmail.com",
+                        Password = "1234"
                     },
                 });
 

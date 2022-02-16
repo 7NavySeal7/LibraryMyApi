@@ -1,4 +1,5 @@
-﻿using Common.Utils.Resources;
+﻿using Common.Utils.Enums;
+using Common.Utils.Resources;
 using LibraryApiR.Handlers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -39,6 +40,7 @@ namespace LibraryApiR.Controllers
         /// <response code="500">Oops! Can't process your request now</response>
         [HttpGet]
         [Route("GetAllEditorial")]
+        [CustomPermissionFilter(Enums.Permission.ConsultarEditoriales)]
         public IActionResult GetAllEditorial()
         {
             List<EditorialDto> list = _editorialService.GetAllEditorials();
@@ -61,6 +63,7 @@ namespace LibraryApiR.Controllers
         /// <response code="500">Oops! Can't process your request now</response>
         [HttpPost]
         [Route("InsertEditorial")]
+        [CustomPermissionFilter(Enums.Permission.CrearEditoriales)]
         public async Task<IActionResult> InsertEditorial(EditorialDto editDto)
         {
             IActionResult response;
@@ -90,6 +93,7 @@ namespace LibraryApiR.Controllers
         /// <response code="500">Oops! Can't process your request now</response>
         [HttpPut]
         [Route("UpdateEditorial")]
+        [CustomPermissionFilter(Enums.Permission.ActualizarEditoriales)]
         public async Task<IActionResult> UpdateEditorial(EditorialDto editDto)
         {
             IActionResult response;
@@ -119,6 +123,7 @@ namespace LibraryApiR.Controllers
         /// <response code="500">Oops! Can't process your request now</response>
         [HttpDelete]
         [Route("DeleteEditorial")]
+        [CustomPermissionFilter(Enums.Permission.EliminarEditoriales)]
         public async Task<IActionResult> DeleteEditorial(int idEdit)
         {
             IActionResult response;

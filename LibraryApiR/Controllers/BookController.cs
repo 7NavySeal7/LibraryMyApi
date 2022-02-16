@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LibraryApiR.Handlers;
 using static Common.Utils.Constant.Const;
+using Common.Utils.Enums;
 
 namespace LibraryApiR.Controllers
 {
@@ -42,6 +43,7 @@ namespace LibraryApiR.Controllers
         #region Methods
         [HttpGet]
         [Route("GetAllBooks")]
+        [CustomPermissionFilter(Enums.Permission.ConsultarLibros)]
         public IActionResult GetAllBooks()
         {
             List<ConsultBookDto> list = _bookService.GetAllBooks();
@@ -65,6 +67,7 @@ namespace LibraryApiR.Controllers
         /// <response code="500">Oops! Can't process your request now</response>
         [HttpGet]
         [Route("GetBook")]
+        [CustomPermissionFilter(Enums.Permission.ConsultarLibros)]
         public IActionResult GetBook(int idBook)
         {
             ConsultBookDto list = _bookService.GetBook(idBook);
@@ -87,6 +90,7 @@ namespace LibraryApiR.Controllers
         /// <response code="500">Oops! Can't process your request now</response>
         [HttpPost]
         [Route("InsertBooks")]
+        [CustomPermissionFilter(Enums.Permission.CrearLibros)]
         public async Task<IActionResult> InsertBooks(InsertBookDto book)
         {
             //Bandera =>Tipo de respuesta que vamos a usar
@@ -117,6 +121,7 @@ namespace LibraryApiR.Controllers
         /// <response code="500">Oops! Can't process your request now</response>
         [HttpPut]
         [Route("UpdateBooks")]
+        [CustomPermissionFilter(Enums.Permission.ActualizarLibros)]
         public async Task<IActionResult> UpdateBooks(BookDto book)
         {
             IActionResult response;
@@ -147,6 +152,7 @@ namespace LibraryApiR.Controllers
         /// <response code="500">Oops! Can't process your request now</response>
         [HttpDelete]
         [Route("DeleteBooks")]
+        [CustomPermissionFilter(Enums.Permission.EliminarLibros)]
         public async Task<IActionResult> DeleteBooks(int idBook)
         {
             IActionResult response;
