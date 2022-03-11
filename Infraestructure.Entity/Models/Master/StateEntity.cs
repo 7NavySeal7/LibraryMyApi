@@ -15,9 +15,5 @@ namespace Infraestructure.Entity.Models.Master
         
         [MaxLength(100)]
         public string State { get; set; }
-
-        [ForeignKey("TypeStateEntity")]
-        public int IdTypeState { get; set; }
-        public TypeStateEntity TypeStateEntity { get; set; }
     }
 }

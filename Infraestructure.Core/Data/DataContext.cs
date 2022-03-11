@@ -22,11 +22,11 @@ namespace Infraestructure.Core.Data
         public DbSet<RolPermissionEntity> RolPermissionEntity { get; set; }
         public DbSet<TypePermissionEntity> TypePermissionEntity { get; set; }
         public DbSet<StateEntity> StateEntity { get; set; }
-        public DbSet<TypeStateEntity> TypeStateEntity { get; set; }
         public DbSet<AuthorEntity> AuthorEntity { get; set; }
         public DbSet<EditorialEntity> EditorialEntity { get; set; }
         public DbSet<BookEntity> BookEntity { get; set; }
         public DbSet<TypeBookEntity> TypeBookEntity { get; set; }
+        public DbSet<AuthorBookEntity> AuthorBookEntity { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,6 @@ namespace Infraestructure.Core.Data
             .HasIndex(b => b.Email)
             .IsUnique();
 
-            modelBuilder.Entity<TypeStateEntity>().Property(t => t.IdTypeState).ValueGeneratedNever();
             modelBuilder.Entity<StateEntity>().Property(t => t.IdState).ValueGeneratedNever();
             modelBuilder.Entity<TypePermissionEntity>().Property(t => t.IdTypePermission).ValueGeneratedNever();
             modelBuilder.Entity<PermissionEntity>().Property(t => t.IdPermission).ValueGeneratedNever();

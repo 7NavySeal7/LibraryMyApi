@@ -19,8 +19,6 @@ namespace Infraestructure.Core.UnitOfWork.Interface
 
         IRepository<StateEntity> StateRepository { get; }
 
-        IRepository<TypeStateEntity> TypeStateRepository { get; }
-
         IRepository<PermissionEntity> PermissionRepository { get; }
 
         IRepository<TypePermissionEntity> TypePermissionRepository { get; }
@@ -34,6 +32,8 @@ namespace Infraestructure.Core.UnitOfWork.Interface
         IRepository<TypeBookEntity> TypeBookRepository { get; }
 
         IRepository<EditorialEntity> EditorialRepository { get; }
+
+        IRepository<AuthorBookEntity> AuthorBookRepository { get; }
 
 
         void Dispose();

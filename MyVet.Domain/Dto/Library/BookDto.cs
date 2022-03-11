@@ -9,5 +9,6 @@ namespace MyVet.Domain.Dto
     public class BookDto : InsertBookDto
     {
         public int IdBook { get; set; }
+        public int IdAuthorBook { get; set; }
     }
 }

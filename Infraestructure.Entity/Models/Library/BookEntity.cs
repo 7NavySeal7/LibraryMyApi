@@ -24,16 +24,18 @@ namespace Infraestructure.Entity.Models.Library
         public int IdEditorial { get; set; }
         public EditorialEntity EditorialEntity { get; set; }
 
-        [ForeignKey("AuthorEntity")]
-        public int IdAuthor { get; set; }
-        public AuthorEntity AuthorEntity { get; set; }
-
-        [ForeignKey ("TypeBookEntity")]
+        [ForeignKey("TypeBookEntity")]
         public int IdTypeBook { get; set; }
         public TypeBookEntity TypeBookEntity { get; set; }
 
         [ForeignKey("StateEntity")]
         public int IdState { get; set; }
-        public StateEntity StateEntity { get; set; }        
+        public StateEntity StateEntity { get; set; }
+
+        //[NotMapped]
+        //public AuthorBookEntity AuthorBookEntity { get; set; }
+
+        //[NotMapped]
+        //public AuthorEntity AuthorEntity { get; set; }
     }
 }

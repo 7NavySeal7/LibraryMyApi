@@ -24,7 +24,6 @@ namespace Infraestructure.Core.Data
         public async Task ExecSeedAsync()
         {
             await _context.Database.EnsureCreatedAsync(); //Comando para asegurarse que la base de datos este creada.
-            await CheckTypeStateAsync();
             await CheckStateAsync();
             await CheckTypePermissionAsync();
             await CheckPermissionAsync();
@@ -36,24 +35,6 @@ namespace Infraestructure.Core.Data
             await CheckUsersAsync();
         }
 
-        //Tipos de Estados
-        private async Task CheckTypeStateAsync()
-        {
-            if (!_context.TypeStateEntity.Any())
-            {
-                _context.TypeStateEntity.AddRange(new List<TypeStateEntity>
-                {
-                    new TypeStateEntity
-                    {
-                        IdTypeState=(int)Enums.TypeState.EstadoLibro,
-                        TypeState="Estado del Libro"
-                    }
-                });
-
-                await _context.SaveChangesAsync();
-            }
-        }
-
         //Estados
         private async Task CheckStateAsync()
         {
@@ -63,13 +44,11 @@ namespace Infraestructure.Core.Data
                 {        
                     new StateEntity
                     {
-                        IdTypeState=(int)Enums.TypeState.EstadoLibro,
                         IdState=(int)Enums.State.Nuevo,
                         State="Libro Nuevo"
                     },                     
                     new StateEntity
                     {
-                        IdTypeState=(int)Enums.TypeState.EstadoLibro,
                         IdState=(int)Enums.State.Usado,
                         State="Libro Usado"
                     },                     
@@ -118,6 +97,11 @@ namespace Infraestructure.Core.Data
                     {
                         IdTypePermission=(int)Enums.TypePermission.Editoriales,
                         TypePermission="Editoriales"
+                    },                    
+                    new TypePermissionEntity
+                    {
+                        IdTypePermission=(int)Enums.TypePermission.Autores,
+                        TypePermission="Autores"
                     },
                 });
 
@@ -289,6 +273,39 @@ namespace Infraestructure.Core.Data
                         Permission="Consultar Editoriales",
                         Description="Consultar los estados de las editoriales"
                     },
+
+                    //Autores
+                    new PermissionEntity
+                    {
+                        IdPermission=(int)Enums.Permission.CrearAutores,
+                        IdTypePermission=(int)Enums.TypePermission.Autores,
+                        Permission="Crear Autores",
+                        Description="Crear los estados de los autores"
+                    },                    
+                    
+                    new PermissionEntity
+                    {
+                        IdPermission=(int)Enums.Permission.ActualizarAutores,
+                        IdTypePermission=(int)Enums.TypePermission.Autores,
+                        Permission="Actualizar Autores",
+                        Description="Actualizar los estados de los autores"
+                    },                    
+                    
+                    new PermissionEntity
+                    {
+                        IdPermission=(int)Enums.Permission.EliminarAutores,
+                        IdTypePermission=(int)Enums.TypePermission.Autores,
+                        Permission="Eliminar Autores",
+                        Description="Eliminar los estados de los autores"
+                    },                    
+                    
+                    new PermissionEntity
+                    {
+                        IdPermission=(int)Enums.Permission.ConsultarAutores,
+                        IdTypePermission=(int)Enums.TypePermission.Autores,
+                        Permission="Consultar Autores",
+                        Description="Consultar los estados de los autores"
+                    }
                 });
                 await _context.SaveChangesAsync();
             }
@@ -308,11 +325,6 @@ namespace Infraestructure.Core.Data
                     },
                     new RolEntity
                     {
-                        IdRol=(int) Enums.Rol.Bibliotecario,
-                        Rol= "Bibliotecario"
-                    },
-                    new RolEntity
-                    {
                         IdRol = (int)Enums.Rol.Estandar,
                         Rol = "Estandar"
                     },
@@ -328,7 +340,7 @@ namespace Infraestructure.Core.Data
             {
                 var rolesPermisosAdmin = _context.PermissionEntity.Select(x => new RolPermissionEntity
                 {
-                    IdRol = (int)Enums.Rol.Bibliotecario,
+                    IdRol = (int)Enums.Rol.Administrador,
                     IdPermission = x.IdPermission
                 }).ToList();
 
@@ -408,22 +420,27 @@ namespace Infraestructure.Core.Data
                 {
                     new AuthorEntity
                     {
-                        NameAuthor = "Michael Abrash"
+                        Name = "Michael",
+                        LastName = "Abrash"
                     },
 
                     new AuthorEntity
                     {
-                        NameAuthor = "Eric Allman"
+                        Name = "Eric",
+                        LastName = "Allman"
                     },
 
                     new AuthorEntity
                     {
-                        NameAuthor = "Paul Allen"
+                        Name = "Paul",
+                        LastName = "Allen"
+                        
                     },
 
                     new AuthorEntity
                     {
-                        NameAuthor = "Tarn Adams"
+                        Name = "Tarn",
+                        LastName = "Adams"
                     },
                 }) ;
 
@@ -484,7 +501,7 @@ namespace Infraestructure.Core.Data
                     
                     new RolUserEntity()
                         {
-                            IdRol = (int)Enums.Rol.Bibliotecario,
+                            IdRol = (int)Enums.Rol.Administrador,
                             UserEntity = new UserEntity()
                             {
                                 Name = "Juan",

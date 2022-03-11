@@ -23,9 +23,8 @@ namespace Infraestructure.Core.Migrations
                 {
                     IdAuthor = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NameAuthor = table.Column<string>(maxLength: 100, nullable: true),
-                    DateOfBirth = table.Column<DateTime>(nullable: true),
-                    DateOfDeath = table.Column<DateTime>(nullable: true)
+                    Name = table.Column<string>(maxLength: 100, nullable: true),
+                    LastName = table.Column<string>(maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -62,16 +61,16 @@ namespace Infraestructure.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TypeState",
+                name: "State",
                 schema: "Master",
                 columns: table => new
                 {
-                    IdTypeState = table.Column<int>(nullable: false),
-                    TypeState = table.Column<string>(maxLength: 100, nullable: true)
+                    IdState = table.Column<int>(nullable: false),
+                    State = table.Column<string>(maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TypeState", x => x.IdTypeState);
+                    table.PrimaryKey("PK_State", x => x.IdState);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,23 +117,42 @@ namespace Infraestructure.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "State",
-                schema: "Master",
+                name: "Book",
+                schema: "Library",
                 columns: table => new
                 {
-                    IdState = table.Column<int>(nullable: false),
-                    State = table.Column<string>(maxLength: 100, nullable: true),
-                    IdTypeState = table.Column<int>(nullable: false)
+                    IdBook = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 100, nullable: true),
+                    DateRelease = table.Column<DateTime>(nullable: true),
+                    Description = table.Column<string>(maxLength: 100, nullable: true),
+                    IdEditorial = table.Column<int>(nullable: false),
+                    IdTypeBook = table.Column<int>(nullable: false),
+                    IdState = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_State", x => x.IdState);
+                    table.PrimaryKey("PK_Book", x => x.IdBook);
                     table.ForeignKey(
-                        name: "FK_State_TypeState_IdTypeState",
-                        column: x => x.IdTypeState,
+                        name: "FK_Book_Editorial_IdEditorial",
+                        column: x => x.IdEditorial,
+                        principalSchema: "Library",
+                        principalTable: "Editorial",
+                        principalColumn: "IdEditorial",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Book_State_IdState",
+                        column: x => x.IdState,
                         principalSchema: "Master",
-                        principalTable: "TypeState",
-                        principalColumn: "IdTypeState",
+                        principalTable: "State",
+                        principalColumn: "IdState",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Book_TypeBook_IdTypeBook",
+                        column: x => x.IdTypeBook,
+                        principalSchema: "Library",
+                        principalTable: "TypeBook",
+                        principalColumn: "IdTypeBook",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -190,50 +208,31 @@ namespace Infraestructure.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Book",
+                name: "AuthorBook",
                 schema: "Library",
                 columns: table => new
                 {
-                    IdBook = table.Column<int>(nullable: false)
+                    IdAuthorBook = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 100, nullable: true),
-                    DateRelease = table.Column<DateTime>(nullable: true),
-                    Description = table.Column<string>(maxLength: 100, nullable: true),
-                    IdEditorial = table.Column<int>(nullable: false),
                     IdAuthor = table.Column<int>(nullable: false),
-                    IdTypeBook = table.Column<int>(nullable: false),
-                    IdState = table.Column<int>(nullable: false)
+                    IdBook = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Book", x => x.IdBook);
+                    table.PrimaryKey("PK_AuthorBook", x => x.IdAuthorBook);
                     table.ForeignKey(
-                        name: "FK_Book_Author_IdAuthor",
+                        name: "FK_AuthorBook_Author_IdAuthor",
                         column: x => x.IdAuthor,
                         principalSchema: "Library",
                         principalTable: "Author",
                         principalColumn: "IdAuthor",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Book_Editorial_IdEditorial",
-                        column: x => x.IdEditorial,
+                        name: "FK_AuthorBook_Book_IdBook",
+                        column: x => x.IdBook,
                         principalSchema: "Library",
-                        principalTable: "Editorial",
-                        principalColumn: "IdEditorial",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Book_State_IdState",
-                        column: x => x.IdState,
-                        principalSchema: "Master",
-                        principalTable: "State",
-                        principalColumn: "IdState",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Book_TypeBook_IdTypeBook",
-                        column: x => x.IdTypeBook,
-                        principalSchema: "Library",
-                        principalTable: "TypeBook",
-                        principalColumn: "IdTypeBook",
+                        principalTable: "Book",
+                        principalColumn: "IdBook",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -267,10 +266,16 @@ namespace Infraestructure.Core.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_IdAuthor",
+                name: "IX_AuthorBook_IdAuthor",
                 schema: "Library",
-                table: "Book",
+                table: "AuthorBook",
                 column: "IdAuthor");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AuthorBook_IdBook",
+                schema: "Library",
+                table: "AuthorBook",
+                column: "IdBook");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Book_IdEditorial",
@@ -289,12 +294,6 @@ namespace Infraestructure.Core.Migrations
                 schema: "Library",
                 table: "Book",
                 column: "IdTypeBook");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_State_IdTypeState",
-                schema: "Master",
-                table: "State",
-                column: "IdTypeState");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Permission_IdTypePermission",
@@ -337,7 +336,7 @@ namespace Infraestructure.Core.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Book",
+                name: "AuthorBook",
                 schema: "Library");
 
             migrationBuilder.DropTable(
@@ -353,15 +352,7 @@ namespace Infraestructure.Core.Migrations
                 schema: "Library");
 
             migrationBuilder.DropTable(
-                name: "Editorial",
-                schema: "Library");
-
-            migrationBuilder.DropTable(
-                name: "State",
-                schema: "Master");
-
-            migrationBuilder.DropTable(
-                name: "TypeBook",
+                name: "Book",
                 schema: "Library");
 
             migrationBuilder.DropTable(
@@ -377,8 +368,16 @@ namespace Infraestructure.Core.Migrations
                 schema: "Security");
 
             migrationBuilder.DropTable(
-                name: "TypeState",
+                name: "Editorial",
+                schema: "Library");
+
+            migrationBuilder.DropTable(
+                name: "State",
                 schema: "Master");
+
+            migrationBuilder.DropTable(
+                name: "TypeBook",
+                schema: "Library");
 
             migrationBuilder.DropTable(
                 name: "TypePermission",

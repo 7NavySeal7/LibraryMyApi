@@ -31,6 +31,7 @@ namespace LibraryApiR.Handlers
             services.AddTransient<IBookService, BookService>();
             services.AddTransient<IEditorialService, EditorialService>();
             services.AddTransient<IPermissionServices, PermissionServices>();
+            services.AddTransient<IAuthorService, AuthorServices>();
         }
     }
 }

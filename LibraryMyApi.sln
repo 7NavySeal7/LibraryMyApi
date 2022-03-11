@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Infraestructure", "3. In
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Helpers", "4. Helpers", "{0C8B014F-B735-430B-9529-9EEB3CAE6ACB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryApiR", "LibraryApiR\LibraryApiR.csproj", "{77DEB859-80E1-4FDC-B6B6-0FB08F87F09A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryApiR", "LibraryApiR\LibraryApiR.csproj", "{77DEB859-80E1-4FDC-B6B6-0FB08F87F09A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

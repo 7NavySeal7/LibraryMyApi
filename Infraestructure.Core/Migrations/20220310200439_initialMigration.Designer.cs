@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructure.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220216163059_initialMigration")]
+    [Migration("20220310200439_initialMigration")]
     partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,28 @@ namespace Infraestructure.Core.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Infraestructure.Entity.Models.Library.AuthorBookEntity", b =>
+                {
+                    b.Property<int>("IdAuthorBook")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdAuthor")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdBook")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdAuthorBook");
+
+                    b.HasIndex("IdAuthor");
+
+                    b.HasIndex("IdBook");
+
+                    b.ToTable("AuthorBook","Library");
+                });
+
             modelBuilder.Entity("Infraestructure.Entity.Models.Library.AuthorEntity", b =>
                 {
                     b.Property<int>("IdAuthor")
@@ -28,13 +50,11 @@ namespace Infraestructure.Core.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
-                    b.Property<DateTime?>("DateOfDeath")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NameAuthor")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
@@ -57,9 +77,6 @@ namespace Infraestructure.Core.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<int>("IdAuthor")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdEditorial")
                         .HasColumnType("int");
 
@@ -74,8 +91,6 @@ namespace Infraestructure.Core.Migrations
                         .HasMaxLength(100);
 
                     b.HasKey("IdBook");
-
-                    b.HasIndex("IdAuthor");
 
                     b.HasIndex("IdEditorial");
 
@@ -127,32 +142,13 @@ namespace Infraestructure.Core.Migrations
                     b.Property<int>("IdState")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdTypeState")
-                        .HasColumnType("int");
-
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
                     b.HasKey("IdState");
 
-                    b.HasIndex("IdTypeState");
-
                     b.ToTable("State","Master");
-                });
-
-            modelBuilder.Entity("Infraestructure.Entity.Models.Master.TypeStateEntity", b =>
-                {
-                    b.Property<int>("IdTypeState")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TypeState")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.HasKey("IdTypeState");
-
-                    b.ToTable("TypeState","Master");
                 });
 
             modelBuilder.Entity("Infraestructure.Entity.Models.PermissionEntity", b =>
@@ -285,7 +281,7 @@ namespace Infraestructure.Core.Migrations
                     b.ToTable("User","Security");
                 });
 
-            modelBuilder.Entity("Infraestructure.Entity.Models.Library.BookEntity", b =>
+            modelBuilder.Entity("Infraestructure.Entity.Models.Library.AuthorBookEntity", b =>
                 {
                     b.HasOne("Infraestructure.Entity.Models.Library.AuthorEntity", "AuthorEntity")
                         .WithMany()
@@ -293,6 +289,15 @@ namespace Infraestructure.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Infraestructure.Entity.Models.Library.BookEntity", "BookEntity")
+                        .WithMany()
+                        .HasForeignKey("IdBook")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Infraestructure.Entity.Models.Library.BookEntity", b =>
+                {
                     b.HasOne("Infraestructure.Entity.Models.Library.EditorialEntity", "EditorialEntity")
                         .WithMany()
                         .HasForeignKey("IdEditorial")
@@ -308,15 +313,6 @@ namespace Infraestructure.Core.Migrations
                     b.HasOne("Infraestructure.Entity.Models.Library.TypeBookEntity", "TypeBookEntity")
                         .WithMany()
                         .HasForeignKey("IdTypeBook")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Infraestructure.Entity.Models.Master.StateEntity", b =>
-                {
-                    b.HasOne("Infraestructure.Entity.Models.Master.TypeStateEntity", "TypeStateEntity")
-                        .WithMany()
-                        .HasForeignKey("IdTypeState")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

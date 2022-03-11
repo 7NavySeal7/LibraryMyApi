@@ -35,7 +35,6 @@ namespace Infraestructure.Core.UnitOfWork
         private IRepository<RolEntity> rolRepository;
         private IRepository<RolUserEntity> rolUserRepository;
         private IRepository<StateEntity> stateRepository;
-        private IRepository<TypeStateEntity> typeStateRepository;
         private IRepository<PermissionEntity> permissionRepository;
         private IRepository<TypePermissionEntity> typePermissionRepository;
         private IRepository<RolPermissionEntity> rolPermissionRepository;
@@ -43,6 +42,7 @@ namespace Infraestructure.Core.UnitOfWork
         private IRepository<BookEntity> bookRepository;
         private IRepository<TypeBookEntity> typeBookRepository;
         private IRepository<EditorialEntity> editorialRepository;
+        private IRepository<AuthorBookEntity> authorBookRepository;
         #endregion
 
 
@@ -85,16 +85,6 @@ namespace Infraestructure.Core.UnitOfWork
                     this.stateRepository = new Repository<StateEntity>(_context);
 
                 return stateRepository;
-            }
-        }
-        public IRepository<TypeStateEntity> TypeStateRepository
-        {
-            get
-            {
-                if (this.typeStateRepository == null)
-                    this.typeStateRepository = new Repository<TypeStateEntity>(_context);
-
-                return typeStateRepository;
             }
         }
         public IRepository<PermissionEntity> PermissionRepository
@@ -166,7 +156,19 @@ namespace Infraestructure.Core.UnitOfWork
 
                 return editorialRepository;
             }
+        }        
+        public IRepository<AuthorBookEntity> AuthorBookRepository
+        {
+            get
+            {
+                if (this.authorBookRepository == null)
+                    this.authorBookRepository = new Repository<AuthorBookEntity>(_context);
+
+                return authorBookRepository;
+            }
         }
+
+
         #endregion
 
 

@@ -13,8 +13,9 @@ namespace Infraestructure.Entity.Models.Library
         public int IdAuthor { get; set; }
 
         [MaxLength(100)]
-        public string NameAuthor { get; set; }
-        public DateTime? DateOfBirth { get; set; }
-        public DateTime? DateOfDeath { get; set; }
+        public string Name { get; set; }
+
+        [MaxLength(100)]
+        public string LastName { get; set; }
     }
 }

@@ -6,12 +6,6 @@ namespace Common.Utils.Enums
 {
     public class Enums
     {
-        public enum TypeState
-        {
-            //Libros
-            EstadoLibro = 1
-        }
-
         public enum State
         {
             //Libros
@@ -26,7 +20,8 @@ namespace Common.Utils.Enums
             Permisos = 3,
             Estados = 4,
             Libros = 5,
-            Editoriales = 6
+            Editoriales = 6,
+            Autores = 7
         }
 
         public enum Permission
@@ -60,14 +55,19 @@ namespace Common.Utils.Enums
             CrearEditoriales = 16,
             ActualizarEditoriales = 17,
             EliminarEditoriales = 18,
-            ConsultarEditoriales = 19
+            ConsultarEditoriales = 19,
+
+            //Autores
+            CrearAutores = 20,
+            ActualizarAutores = 21,
+            EliminarAutores = 22,
+            ConsultarAutores = 23
         }
 
         public enum Rol
         {
             Administrador = 1,
-            Bibliotecario = 2,
-            Estandar = 3 
+            Estandar = 2 
         }
 
         public enum TypeBook
