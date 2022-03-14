@@ -33,6 +33,7 @@ namespace LibraryApiR.Controllers
         }
         #endregion
 
+        #region Methods
         /// <summary>
         /// Obtiene todos los libros de la Biblioteca
         /// </summary>
@@ -40,13 +41,60 @@ namespace LibraryApiR.Controllers
         /// <response code="200">OK! </response>
         /// <response code="400">Business Exception</response>
         /// <response code="500">Oops! Can't process your request now</response>
-        #region Methods
         [HttpGet]
         [Route("GetAllBooks")]
         [CustomPermissionFilter(Enums.Permission.ConsultarLibros)]
         public IActionResult GetAllBooks()
         {
             List<ConsultBookDto> list = _bookService.GetAllBooks();
+
+            ResponseDto response = new ResponseDto()
+            {
+                IsSuccess = true,
+                Result = list,
+                Message = string.Empty
+            };
+            return Ok(response);
+        }
+
+
+        /// <summary>
+        /// Obtiene todos los Tipos de estado del libro
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200">OK! </response>
+        /// <response code="400">Business Exception</response>
+        /// <response code="500">Oops! Can't process your request now</response>
+        [HttpGet]
+        [Route("GetAllTypeBooks")]
+        [CustomPermissionFilter(Enums.Permission.ConsultarLibros)]
+        public IActionResult GetAllTypeBooks()
+        {
+            List<TypeBookDto> list = _bookService.GetAllTypeBooks();
+
+            ResponseDto response = new ResponseDto()
+            {
+                IsSuccess = true,
+                Result = list,
+                Message = string.Empty
+            };
+            return Ok(response);
+        }
+
+
+        /// <summary>
+        /// Obtiene todos los Estados
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200">OK! </response>
+        /// <response code="400">Business Exception</response>
+        /// <response code="500">Oops! Can't process your request now</response>
+        [HttpGet]
+        [Route("GetAllState")]
+        [CustomPermissionFilter(Enums.Permission.ConsultarLibros)]
+        public IActionResult GetAllState()
+        {
+            List<StateDto> list = _bookService.GetAllState();
 
             ResponseDto response = new ResponseDto()
             {
@@ -141,7 +189,6 @@ namespace LibraryApiR.Controllers
             return response;
         }
 
-
         /// <summary>
         /// Eliminar Libros
         /// </summary>
@@ -165,7 +212,6 @@ namespace LibraryApiR.Controllers
 
             return Ok(response);
         }
-
         #endregion
     }
 }

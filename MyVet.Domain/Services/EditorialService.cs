@@ -31,7 +31,8 @@ namespace MyVet.Domain.Services
             List<EditorialDto> editorial = edit.Select(x=> new EditorialDto
             { 
                 IdEditorial = x.IdEditorial,
-                Editorial = x.Editorial
+                Editorial = x.Editorial,
+                Sede = x.Sede
             }).ToList();
 
             return editorial;
@@ -41,7 +42,8 @@ namespace MyVet.Domain.Services
         {
             EditorialEntity edit = new EditorialEntity()
             {
-                Editorial = editDto.Editorial
+                Editorial = editDto.Editorial,
+                Sede = editDto.Sede
             };
 
             _unitOfWork.EditorialRepository.Insert(edit);
@@ -56,6 +58,7 @@ namespace MyVet.Domain.Services
             if (edit != null)
             {
                 edit.Editorial = editDto.Editorial;
+                edit.Sede = editDto.Sede;
 
                 _unitOfWork.EditorialRepository.Update(edit);
                 result = await _unitOfWork.Save() > 0;

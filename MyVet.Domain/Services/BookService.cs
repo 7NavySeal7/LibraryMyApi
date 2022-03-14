@@ -56,6 +56,33 @@ namespace MyVet.Domain.Services
             return listBooks;
         }
 
+        public List<TypeBookDto> GetAllTypeBooks()
+        {
+            var typeBooks = _unitOfWork.TypeBookRepository.GetAll();
+
+            List<TypeBookDto> type = typeBooks.Select(x => new TypeBookDto
+            {
+                IdTypeBook = x.IdTypeBook,
+                TypeBook = x.TypeBook,
+                Description = x.Description
+            }).ToList();
+
+            return type;
+        }
+
+        public List<StateDto> GetAllState()
+        {
+            var state = _unitOfWork.StateRepository.GetAll();
+
+            List<StateDto> states = state.Select(x => new StateDto
+            {
+                IdState = x.IdState,
+                State = x.State
+            }).ToList();
+
+            return states;
+        }
+
         public ConsultBookDto GetBook(int idBook)
         {
             var books = _unitOfWork.AuthorBookRepository.FirstOrDefault(x => x.BookEntity.IdBook == idBook,
@@ -136,8 +163,9 @@ namespace MyVet.Domain.Services
         public async Task<ResponseDto> DeleteBooksAsync(int idBook)
         {
             ResponseDto response = new ResponseDto();
-            var auth = _unitOfWork.AuthorBookRepository.FirstOrDefault(x => x.IdBook == idBook);
-            _unitOfWork.AuthorBookRepository.Delete(auth);
+            //var auth = _unitOfWork.AuthorBookRepository.FirstOrDefault(x => x.IdBook == idBook);
+            //_unitOfWork.AuthorBookRepository.Delete(auth);
+
             _unitOfWork.BookRepository.Delete(idBook);
             response.IsSuccess = await _unitOfWork.Save() > 0;
             if (response.IsSuccess)

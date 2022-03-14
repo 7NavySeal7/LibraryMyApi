@@ -110,6 +110,10 @@ namespace Infraestructure.Core.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
+                    b.Property<string>("Sede")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
                     b.HasKey("IdEditorial");
 
                     b.ToTable("Editorial","Library");

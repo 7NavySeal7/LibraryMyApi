@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructure.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220310200439_initialMigration")]
+    [Migration("20220314130946_initialMigration")]
     partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,6 +109,10 @@ namespace Infraestructure.Core.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Editorial")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Sede")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 

@@ -457,22 +457,26 @@ namespace Infraestructure.Core.Data
                 {
                     new EditorialEntity
                     {
-                        Editorial = "Paenza"
+                        Editorial = "Paenza",
+                        Sede = "Francia"
                     },
 
                     new EditorialEntity
                     {
-                        Editorial = "Edicions"
+                        Editorial = "Edicions",
+                        Sede = "Colombia"
                     },
 
                     new EditorialEntity
                     {
-                        Editorial = "Users"
+                        Editorial = "Users",
+                        Sede = "Canada"
                     },
 
                     new EditorialEntity
                     {
-                        Editorial = "Atalanta"
+                        Editorial = "Atalanta",
+                        Sede = "Estonia"
                     },
                 });
 

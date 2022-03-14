@@ -38,7 +38,8 @@ namespace Infraestructure.Core.Migrations
                 {
                     IdEditorial = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Editorial = table.Column<string>(maxLength: 100, nullable: true)
+                    Editorial = table.Column<string>(maxLength: 100, nullable: true),
+                    Sede = table.Column<string>(maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {

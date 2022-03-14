@@ -8,8 +8,7 @@ namespace MyVet.Domain.Dto.Library
     public class EditorialDto
     {
         public int IdEditorial { get; set; }
-
-        [MaxLength(100)]
         public string Editorial { get; set; }
+        public string Sede { get; set; }
     }
 }
