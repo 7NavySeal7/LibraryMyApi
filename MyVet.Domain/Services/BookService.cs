@@ -169,7 +169,7 @@ namespace MyVet.Domain.Services
             _unitOfWork.BookRepository.Delete(idBook);
             response.IsSuccess = await _unitOfWork.Save() > 0;
             if (response.IsSuccess)
-                response.Message = "Se elminnó correctamente el Libro";
+                response.Message = "Se eliminó correctamente el Libro";
             else
                 response.Message = "Hubo un error al eliminar el Libro, por favor vuelva a intentalo";
 

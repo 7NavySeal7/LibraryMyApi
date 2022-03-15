@@ -96,9 +96,21 @@ namespace MyVet.Domain.Services
         //Esta función sirve para devolverme una lista de usuarios
         //El metodo GetAll es del repositorio
         //El UserRepository es de la unidad de trabajo
-        public List<UserEntity> GetAll()
+        public List<ConsultUserDto> GetAll()
         {
-            return _unitOfWork.UserRepository.GetAll().ToList();
+            var user = _unitOfWork.UserRepository.GetAll();
+
+            List<ConsultUserDto> listBooks = user.Select(x => new ConsultUserDto
+            {
+                IdUser = x.IdUser,
+                Name = x.Name,
+                LastName = x.LastName,
+                UserName = x.Email,
+                Password = "No disponible",
+                ConfirmPassword = "No disponible"
+            }).ToList();
+
+            return listBooks;
         }
 
         //Esta función sirve para traerme un usuario especifico

@@ -8,7 +8,7 @@ namespace MyVet.Domain.Services.Interface
     public interface IUserServices
     {
         #region Methods Crud
-        List<UserEntity> GetAll();
+        List<ConsultUserDto> GetAll();
 
         UserEntity GetUser(int idUser);
 

@@ -346,13 +346,7 @@ namespace Infraestructure.Core.Data
 
                 _context.RolPermissionEntity.AddRange(rolesPermisosAdmin);
                 _context.RolPermissionEntity.AddRange(new List<RolPermissionEntity> 
-                { 
-                
-                    new RolPermissionEntity
-                    {
-                        IdRol = (int)Enums.Rol.Estandar,
-                        IdPermission = (int)Enums.Permission.ConsultarUsuarios
-                    },                    
+                {                    
                     
                     new RolPermissionEntity
                     {

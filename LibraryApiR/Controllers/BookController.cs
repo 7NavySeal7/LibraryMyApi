@@ -81,7 +81,6 @@ namespace LibraryApiR.Controllers
             return Ok(response);
         }
 
-
         /// <summary>
         /// Obtiene todos los Estados
         /// </summary>

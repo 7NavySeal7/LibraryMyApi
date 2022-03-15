@@ -8,6 +8,8 @@ namespace MyVet.Domain.Dto
     public class UserDto: LoginDto
     {
 
+        public int IdUser { get; set; }
+
         [Required(ErrorMessage = "El nombre es requerido")]
         [MaxLength(100)]
         [Display(Name = "Nombre")]
