@@ -345,6 +345,34 @@ namespace Infraestructure.Core.Data
                 }).ToList();
 
                 _context.RolPermissionEntity.AddRange(rolesPermisosAdmin);
+                _context.RolPermissionEntity.AddRange(new List<RolPermissionEntity> 
+                { 
+                
+                    new RolPermissionEntity
+                    {
+                        IdRol = (int)Enums.Rol.Estandar,
+                        IdPermission = (int)Enums.Permission.ConsultarUsuarios
+                    },                    
+                    
+                    new RolPermissionEntity
+                    {
+                        IdRol = (int)Enums.Rol.Estandar,
+                        IdPermission = (int)Enums.Permission.ConsultarLibros
+                    },                    
+                    
+                    new RolPermissionEntity
+                    {
+                        IdRol = (int)Enums.Rol.Estandar,
+                        IdPermission = (int)Enums.Permission.ConsultarEditoriales
+                    },                    
+                    
+                    new RolPermissionEntity
+                    {
+                        IdRol = (int)Enums.Rol.Estandar,
+                        IdPermission = (int)Enums.Permission.ConsultarAutores
+                    }
+                
+                });
                 await _context.SaveChangesAsync();
             }
         }

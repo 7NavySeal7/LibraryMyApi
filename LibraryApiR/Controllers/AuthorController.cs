@@ -157,7 +157,7 @@ namespace LibraryApiR.Controllers
             else
                 response = BadRequest(result);
 
-            return Ok(response);
+            return response;
         }
         #endregion
     }
