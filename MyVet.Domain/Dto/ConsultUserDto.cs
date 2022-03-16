@@ -6,6 +6,6 @@ namespace MyVet.Domain.Dto
 {
     public class ConsultUserDto: UserDto
     {
-
+        public string NameRol { get; set; }
     }
 }

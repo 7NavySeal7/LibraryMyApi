@@ -165,7 +165,6 @@ namespace MyVet.Domain.Services
             ResponseDto response = new ResponseDto();
             //var auth = _unitOfWork.AuthorBookRepository.FirstOrDefault(x => x.IdBook == idBook);
             //_unitOfWork.AuthorBookRepository.Delete(auth);
-
             _unitOfWork.BookRepository.Delete(idBook);
             response.IsSuccess = await _unitOfWork.Save() > 0;
             if (response.IsSuccess)

@@ -98,14 +98,15 @@ namespace MyVet.Domain.Services
         //El UserRepository es de la unidad de trabajo
         public List<ConsultUserDto> GetAll()
         {
-            var user = _unitOfWork.UserRepository.GetAll();
+            var user = _unitOfWork.RolUserRepository.GetAll(x => x.RolEntity, x =>x.UserEntity);
 
             List<ConsultUserDto> listBooks = user.Select(x => new ConsultUserDto
             {
-                IdUser = x.IdUser,
-                Name = x.Name,
-                LastName = x.LastName,
-                UserName = x.Email,
+                IdUser = x.UserEntity.IdUser,
+                Name = x.UserEntity.Name,
+                NameRol = x.RolEntity.Rol,
+                LastName = x.UserEntity.LastName,
+                UserName = x.UserEntity.Email,
                 Password = "No disponible",
                 ConfirmPassword = "No disponible"
             }).ToList();
