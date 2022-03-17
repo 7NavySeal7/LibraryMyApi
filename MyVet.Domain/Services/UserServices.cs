@@ -107,8 +107,8 @@ namespace MyVet.Domain.Services
                 NameRol = x.RolEntity.Rol,
                 LastName = x.UserEntity.LastName,
                 UserName = x.UserEntity.Email,
-                Password = "No disponible",
-                ConfirmPassword = "No disponible"
+                Password = "Oculto",
+                ConfirmPassword = "Oculto"
             }).ToList();
 
             return listBooks;
